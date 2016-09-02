@@ -18,6 +18,7 @@ class ReposTableViewController: UITableViewController {
         self.tableView.accessibilityLabel = "tableView"
         self.tableView.accessibilityIdentifier = "tableView"
         
+        
         store.getRepositoriesWithCompletion {
             NSOperationQueue.mainQueue().addOperationWithBlock({ 
                 self.tableView.reloadData()
@@ -40,5 +41,16 @@ class ReposTableViewController: UITableViewController {
 
         return cell
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("row tapped!")
+        let selectedRepo = store.repositories[indexPath.row]
+            store.toggleStarStatusForRepository(selectedRepo) {
+                print ("toggle hit")
+               }
+            
+        }
+        
+    }
 
-}
+
